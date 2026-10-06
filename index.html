@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework Reminder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <button onclick="localStorage.clear(); location.reload();">
+    테스트용 초기화
+</button>
+
+<div class="container">
+
+        <h1>📚 Homework Reminder</h1>
+
+        <div id="profileSetup">
+    <h2>처음 방문하셨나요?</h2>
+
+    <label>이름</label>
+    <input type="text" id="name" placeholder="이름을 입력하세요">
+
+    <label>학교 이름</label>
+    <input type="text" id="school" placeholder="학교 이름을 입력하세요">
+
+    <button onclick="saveProfile()">시작하기</button>
+</div>
+
+    <div id="profileInfo" style="display: none;"></div>
+
+    <div id="homeworkForm" style="display: none;">
+
+    <label>과목</label>
+    <input type="text" id="subject" placeholder="예: Math">
+
+    <label>과제</label>
+    <input type="text" id="homework" placeholder="예: Chapter 5 문제 풀기">
+
+    <label>마감일</label>
+    <input type="date" id="dueDate">
+
+    <label>마감시간</label>
+    <input type="time" id="dueTime">
+
+    <label>중요도</label>
+    <input type="text" id="priority" placeholder="예: 낮음, 중간, 높음">
+
+    <button onclick="addHomework()">과제 등록하기</button>
+
+    <p id="message"></p>
+
+    <h2>내 과제</h2>
+
+    <div id="homeworkList"></div>
+
+</div>
+        </div>
+        <script src="script.js"></script>
+</body>
+</html>

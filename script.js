@@ -197,3 +197,19 @@ alert("완료 처리되었습니다!");
 
 location.reload();
 }
+async function enableNotifications() {
+    if (!("Notification" in window)) {
+        alert("이 브라우저에서는 알림을 지원하지 않습니다.");
+        return;
+    }
+
+    const permission = await Notification.requestPermission();
+
+    if (permission === "granted") {
+        new Notification("Homework Reminder", {
+            body: "🔔 알림이 활성화되었습니다!"
+        });
+    } else {
+        alert("알림 권한이 허용되지 않았습니다.");
+    }
+}

@@ -180,7 +180,7 @@ function completeHomework(index) {
 
     homeworks[index].status = "완료";
 
-    fetch("https://hook.us2.make.com/sedahj9hxw229dr1x487mpgmbndxi09s", {
+    fetch("https://hook.us2.make.com/hsqq35q4jcsmpavj577kwu7myecy2nkq", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

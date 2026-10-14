@@ -219,46 +219,6 @@ async function enableNotifications() {
         alert("알림 권한이 허용되지 않았습니다.");
     }
 }
-async function getOneSignalSubscriptionId(OneSignal) {
-    try {
-        const id = OneSignal.User.PushSubscription.id;
-        console.log("Subscription ID:", id);
-        return id;
-    } catch (error) {
-        console.error("OneSignal ID 가져오기 실패:", error);
-        return null;
-    }
-}
-
-async function sendOneSignalIdToMake(OneSignal) {
-    const subscriptionId = await getOneSignalSubscriptionId(OneSignal);
-
-    if (!subscriptionId) {
-        console.log("Subscription ID가 아직 없어.");
-        return;
-    }
-
-    try {
-        const response = await fetch(
-            "https://hook.us2.make.com/wdgqd8ypujsdxqmk2gym1iwnaczcumgc",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    subscriptionId: subscriptionId,
-                    studentName: localStorage.getItem("studentName"),
-                    schoolName: localStorage.getItem("schoolName")
-                })
-            }
-        );
-
-        console.log("OneSignal ID 전송 응답:", response.status);
-    } catch (error) {
-        console.error("Make 전송 실패:", error);
-    }
-}
 
 window.OneSignalDeferred = window.OneSignalDeferred || [];
 

@@ -1,4 +1,4 @@
-function addHomework() {
+async function addHomework() {
     const subject = document.getElementById("subject").value;
     const name = localStorage.getItem("studentName");
     const school = localStorage.getItem("schoolName");
@@ -12,10 +12,16 @@ function addHomework() {
             "⚠️ 모든 항목을 입력해주세요.";
         return;
     }
+const subscriptionId = await new Promise((resolve) => {
+    window.OneSignalDeferred.push(async function(OneSignal) {
+        resolve(OneSignal.User.PushSubscription.id);
+    });
+});
 const newHomework = {
     id: Date.now().toString(),
     name: name,
     school: school,
+    subscriptionId: subscriptionId,
     subject: subject,
     homework: homework,
     dueDate: dueDate,

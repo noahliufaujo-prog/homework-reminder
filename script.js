@@ -245,4 +245,8 @@ async function sendOneSignalIdToMake() {
 
     console.log("OneSignal ID를 Make로 전송했어.");
 }
-sendOneSignalIdToMake();
+window.OneSignalDeferred = window.OneSignalDeferred || [];
+
+window.OneSignalDeferred.push(async function(OneSignal) {
+    await sendOneSignalIdToMake();
+});

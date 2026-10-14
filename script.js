@@ -234,7 +234,7 @@ async function sendOneSignalIdToMake(OneSignal) {
 
     try {
         const response = await fetch(
-            "https://hook.us2.make.com/soxe1grxner79ey8mw5prbo97hg8j7wp",
+            "https://hook.us2.make.com/wdgqd8ypujsdxqmk2gym1iwnaczcumgc",
             {
                 method: "POST",
                 headers: {

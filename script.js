@@ -213,3 +213,36 @@ async function enableNotifications() {
         alert("알림 권한이 허용되지 않았습니다.");
     }
 }
+async function getOneSignalSubscriptionId() {
+    try {
+        const id = await OneSignal.User.PushSubscription.id;
+        console.log("Subscription ID:", id);
+        return id;
+    } catch (error) {
+        console.error("OneSignal ID 가져오기 실패:", error);
+        return null;
+    }
+}
+async function sendOneSignalIdToMake() {
+    const subscriptionId = await getOneSignalSubscriptionId();
+
+    if (!subscriptionId) {
+        console.log("Subscription ID가 아직 없어.");
+        return;
+    }
+
+    await fetch("https://hook.us2.make.com/wdgqd8ypujsdxqmk2gym1iwnaczcumgc", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            subscriptionId: subscriptionId,
+            studentName: localStorage.getItem("studentName"),
+            schoolName: localStorage.getItem("schoolName")
+        })
+    });
+
+    console.log("OneSignal ID를 Make로 전송했어.");
+}
+sendOneSignalIdToMake();

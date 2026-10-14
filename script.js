@@ -219,9 +219,3 @@ async function enableNotifications() {
         alert("알림 권한이 허용되지 않았습니다.");
     }
 }
-
-window.OneSignalDeferred = window.OneSignalDeferred || [];
-
-window.OneSignalDeferred.push(async function(OneSignal) {
-    await sendOneSignalIdToMake(OneSignal);
-});

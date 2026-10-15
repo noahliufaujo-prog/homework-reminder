@@ -219,3 +219,47 @@ async function enableNotifications() {
         alert("알림 권한이 허용되지 않았습니다.");
     }
 }
+// 프로필 정보 초기화
+document.getElementById("resetProfileBtn").addEventListener("click", function() {
+    const confirmed = confirm(
+        "이름과 학교 정보를 초기화할까요?\n등록된 과제는 삭제되지 않습니다."
+    );
+
+    if (!confirmed) return;
+
+    localStorage.removeItem("studentName");
+    localStorage.removeItem("schoolName");
+
+    location.reload();
+});
+
+
+// 홈 화면에 추가
+let deferredInstallPrompt = null;
+
+window.addEventListener("beforeinstallprompt", function(event) {
+    event.preventDefault();
+    deferredInstallPrompt = event;
+});
+
+document.getElementById("addToHomeBtn").addEventListener("click", async function() {
+    if (deferredInstallPrompt) {
+        deferredInstallPrompt.prompt();
+
+        await deferredInstallPrompt.userChoice;
+        deferredInstallPrompt = null;
+    } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        alert(
+            "홈 화면에 추가하는 방법\n\n" +
+            "1. Safari에서 이 사이트를 여세요.\n" +
+            "2. 아래 공유 버튼(□↑)을 누르세요.\n" +
+            "3. '홈 화면에 추가'를 선택하세요.\n" +
+            "4. 추가를 누르세요."
+        );
+    } else {
+        alert(
+            "브라우저 메뉴(⋮ 또는 공유 메뉴)를 열고\n" +
+            "'홈 화면에 추가' 또는 '앱 설치'를 찾아주세요."
+        );
+    }
+})
